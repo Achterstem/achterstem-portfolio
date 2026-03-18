@@ -116,8 +116,8 @@
         .price-item strong { font-size: 1.5rem; color: #fff; font-family: 'EB Garamond', serif; }
 
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; }
-        .art-card { background: var(--panel); padding: 15px; border: 1px solid rgba(255,255,255,0.03); transition: 0.3s; }
-        .art-card:hover { border-color: var(--gold); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .art-card { background: var(--panel); }
+        .art-card:hover { box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         .art-card img { width: 100%; display: block; filter: grayscale(20%) contrast(1.1); transition: 0.4s; cursor: zoom-in; }
         .art-card:hover img { filter: grayscale(0%); contrast(1.2); }
 
@@ -283,7 +283,7 @@
 
         // ДАННЫЕ ГАЛЕРЕИ
         const galleryData = {
-            illustration: ['illustration1.png'],
+            illustration: ['illustration1.png', 'нянь1.png'],
             chibi: ['https://via.placeholder.com/400x400/111/84754e?text=Chibi+1'],
             references: ['https://via.placeholder.com/800x600/111/84754e?text=Ref+Sheet'],
             items: ['https://via.placeholder.com/400x400/111/84754e?text=Item+Design'],
