@@ -29,14 +29,26 @@
         /* Навигация */
         nav {
             position: fixed;
-            top: 0; width: 100%;
-            padding: 30px;
+            top: 0; 
+            width: 100%;
+            padding: 30px 30px 60px;
             z-index: 1000;
             display: flex;
             justify-content: center;
+            background: linear-gradient(
+                    to bottom, 
+                    var(--bg) 0%,
+                    rgba(5, 5, 5, 0.8) 50%,
+                    transparent 100%
+                );
+            pointer-events: none; 
         }
-
-        nav ul { display: flex; list-style: none; gap: 50px; }
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 50px;
+            pointer-events: auto; 
+        }
         nav a {
             text-decoration: none;
             color: var(--text);
@@ -67,8 +79,8 @@
             width: 180px; height: 180px;
             background: url('https://via.placeholder.com/180/111/84754e?text=AVATAR') center/cover;
             margin-bottom: 30px;
-            box-shadow: 0 0 50px rgba(0,0,0,0.8);
-            border: 1px solid rgba(132, 117, 78, 0.1);
+            box-shadow: 0 0 50px rgba(0,0,0,0.2);
+            border: 1px solid rgba(132, 117, 78, 0.1); border-radius: 30px;
         }
 
         .profile-content h1 {
@@ -90,7 +102,7 @@
         }
         .links a:hover { color: var(--accent); }
 
-        /* ОБЩИЙ КОНТЕЙНЕР */
+        /* ОБЩИЙ КОНТ */
         .content-wrap { max-width: 1200px; margin: 0 auto; padding: 0 40px 100px; }
         
         .cat-header { margin-bottom: 10px; }
@@ -115,11 +127,55 @@
         .price-item span { display: block; font-family: 'Cinzel', serif; color: var(--gold); font-size: 0.7rem; letter-spacing: 2px; margin-bottom: 5px; }
         .price-item strong { font-size: 1.5rem; color: #fff; font-family: 'EB Garamond', serif; }
 
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; }
-        .art-card { background: var(--panel); }
-        .art-card:hover { box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .art-card img { width: 100%; display: block; filter: grayscale(20%) contrast(1.1); transition: 0.4s; cursor: zoom-in; }
-        .art-card:hover img { filter: grayscale(0%); contrast(1.2); }
+        .grid { 
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: flex-start;
+}
+
+.art-card { 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+    height: fit-content;
+}
+
+.art-card:hover {
+}
+
+.art-card img { 
+    display: block;
+    border-radius: 20px;
+    max-width: 100%;
+    height: auto;
+    max-height: 400px;
+    filter: grayscale(20%) contrast(1.1); 
+    transition: 0.4s; 
+    cursor: zoom-in; 
+}
+
+.art-card:hover img { 
+    filter: grayscale(0%); 
+    contrast: 1.2; 
+}
+
+#grid-items, #grid-costumes {
+    gap: 10px;
+}
+
+#grid-costumes .art-card img {
+    max-height: 150px;
+}
+
+@media (max-width: 900px) {
+    .grid { column-count: 2; }
+}
+
+@media (max-width: 600px) {
+    .grid { column-count: 1; }
+}
 
         .extra-info {
             margin-bottom: 20px;
@@ -162,7 +218,7 @@
             cursor: zoom-out;
             animation: fadeIn 0.3s ease;
         }
-        #lightbox img { max-width: 90%; max-height: 90%; border: 1px solid var(--gold); }
+        #lightbox img { max-width: 90%; max-height: 90%; }
 
     </style>
 </head>
@@ -170,8 +226,8 @@
 
     <nav>
         <ul>
-            <li><a onclick="showPage('about')" id="link-about">Spirit</a></li>
-            <li><a onclick="showPage('gallery')" id="link-gallery">Remains</a></li>
+            <li><a onclick="showPage('about')" id="link-about">PROFILE</a></li>
+            <li><a onclick="showPage('gallery')" id="link-gallery">GALLERY</a></li>
             <li><a onclick="showPage('tos')" id="link-tos">TOS</a></li>
         </ul>
     </nav>
@@ -185,8 +241,8 @@
             <div class="profile-content">
                 <div class="avatar"><img src="avatar.png" alt="Аватар" class="avatar"></div>
                 <h1>Achterstem</h1>
-                <div class="status-text">Available for Commissions</div>
-                <p class="bio">Художник.</p>
+                <div class="status-text">- not available for commissions -</div>
+                <p class="bio">Artist.</p>
                 <div class="links">
                     <a href="https://t.me/Achterstem">Telegram</a>
                     <a href="https://vk.com/l_corsair_l">Vkontakte</a>
@@ -232,17 +288,25 @@
                 </div>
 
                 <div class="category-section">
-                    <div class="cat-header"><h2>ITEMS & COSTUMES</h2></div>
+                    <div class="cat-header"><h2>ITEMS</h2></div>
                     <div class="price-list">
-                        <strong>5-10$</strong>
+                        <strong>catwar</strong>
                     </div>
                     <div id="grid-items" class="grid"></div>
                 </div>
 
                 <div class="category-section">
-                    <div class="cat-header"><h2>BACKGROUNDS FOR GAME</h2></div>
+                    <div class="cat-header"><h2>COSTUMES</h2></div>
                     <div class="price-list">
-                        <strong>5-10$</strong>
+                        <strong>catwar</strong>
+                    </div>
+                    <div id="grid-costumes" class="grid"></div>
+                </div>
+
+                <div class="category-section">
+                    <div class="cat-header"><h2>BACKGROUNDS</h2></div>
+                    <div class="price-list">
+                        <strong>catwar</strong>
                     </div>
                     <div id="grid-bg" class="grid"></div>
                 </div>
@@ -254,11 +318,11 @@
             <div class="content-wrap">
                 <div class="cat-header"><h2>TOS</h2></div>
                 <div class="laws-container">
-                    <div class="law-row"><div class="law-number">I</div><div class="law-text">100% оплата после наброска. Сбербанк / Т-банк / Lava.top.</div></div>
-                    <div class="law-row"><div class="law-number">II</div><div class="law-text">Срок исполнения заказа — 2 месяца.</div></div>
-                    <div class="law-row"><div class="law-number">III</div><div class="law-text">Правки бесплатны только на этапе наброска.</div></div>
-                    <div class="law-row"><div class="law-number">IV</div><div class="law-text">Запретные темы: NSFW, Меха.</div></div>
-                    <div class="law-row"><div class="law-number">V</div><div class="law-text">Я возвращаю деньги только в случае просрочки дедлайна.</div></div>
+                    <div class="law-row"><div class="law-number">I</div><div class="law-text">100% payment after the sketch. Methods: Sberbank / T-bank / Lava.top.</div></div>
+                    <div class="law-row"><div class="law-number">II</div><div class="law-text">The turnaround time is 2 months.</div></div>
+                    <div class="law-row"><div class="law-number">III</div><div class="law-text">Free edits are only available during the sketch stage.</div></div>
+                    <div class="law-row"><div class="law-number">IV</div><div class="law-text">I do not draw: hard NSFW, Mecha.</div></div>
+                    <div class="law-row"><div class="law-number">V</div><div class="law-text">Refunds are only issued if the deadline is missed.</div></div>
                 </div>
             </div>
         </section>
@@ -281,12 +345,13 @@
         }
         function closeLightbox() { document.getElementById('lightbox').style.display = 'none'; }
 
-        // ДАННЫЕ ГАЛЕРЕИ
+        // ГАЛЕРЕЯ УРААААА
         const galleryData = {
-            illustration: ['illustration1.png', 'нянь1.png'],
+            illustration: ['illustration1.png', 'нянь1.png', 'костёр2.png', 'костёр1.png', 'ушастик.png', 'ВЕСТНИКИ СМЕРТИ ворон.png', 'pik1.png', 'output_optimized (6).png', 'output_optimized (5).png', 'output_optimized (4).png'],
             chibi: ['https://via.placeholder.com/400x400/111/84754e?text=Chibi+1'],
             references: ['https://via.placeholder.com/800x600/111/84754e?text=Ref+Sheet'],
-            items: ['https://via.placeholder.com/400x400/111/84754e?text=Item+Design'],
+            items: ['output_optimized (6).png', 'output_optimized (5).png', 'output_optimized (4).png', 'output_optimized (3).png', 'output_optimized (2).png', 'output_optimized (1).png'],
+            costumes: ['камаштли_новая модель1.png', 'волк_2.png', 'камаштли_новая модель1.png', 'камаштли_новая модель1.png', 'загружено (55).png', 'камаштли_новая модель1.png'],
             bg: ['https://via.placeholder.com/800x450/111/84754e?text=Game+BG']
         };
 
@@ -305,6 +370,7 @@
         renderGrid('grid-chibi', galleryData.chibi);
         renderGrid('grid-references', galleryData.references);
         renderGrid('grid-items', galleryData.items);
+        renderGrid('grid-costumes', galleryData.costumes);
         renderGrid('grid-bg', galleryData.bg);
 
         document.getElementById('link-about').classList.add('active-link');
