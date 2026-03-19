@@ -102,7 +102,7 @@
         }
         .links a:hover { color: var(--accent); }
 
-        /* ОБЩИЙ КОНТЕНТ */
+        /* КОНТЕНТ */
         .content-wrap { max-width: 1200px; margin: 0 auto; padding: 0 40px 100px; }
         
         .cat-header { margin-bottom: 10px; }
@@ -114,7 +114,7 @@
             letter-spacing: 3px;
         }
 
-        /* ГАЛЕРЕЯ MASONRY (2 колонки на мобильных) */
+        /* ГАЛЕРЕЯ */
         .category-section { margin-bottom: 120px; }
 
         .grid { 
@@ -161,13 +161,13 @@
         }
 
         #grid-items .art-card img {
-            height: 70px; /* Максимальный размер предметов */
+            height: 70px;
             width: auto;
             border-radius: 10px;
         }
 
         #grid-costumes .art-card img {
-            height: 150px; /* Размер костюмов */
+            height: 150px;
             width: auto;
             border-radius: 10px;
         }
@@ -212,7 +212,7 @@
         }
         .law-text { font-size: 1.3rem; line-height: 1.6; color: var(--text); }
 
-        /* АДАПТИВНОСТЬ */
+        /* АДАПТИВКА */
         @media (max-width: 900px) {
             .grid { column-count: 2; }
             .content-wrap { padding: 0 20px 60px; }
@@ -224,7 +224,6 @@
             .grid { column-count: 2; column-gap: 10px; }
             .art-card { margin-bottom: 10px; }
             
-            /* Цены в одну строчку */
             .price-list {
                 display: flex;
                 flex-direction: row;
@@ -248,7 +247,7 @@
             .law-text { font-size: 1.1rem; }
         }
 
-        /* LIGHTBOX */
+        /* ЛАЙТБОКС */
         #lightbox {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -372,9 +371,9 @@
         function closeLightbox() { document.getElementById('lightbox').style.display = 'none'; }
 
         const galleryData = {
-            illustration: ['illustration1.png', 'illustration2.png', 'illustration3.png', 'illustration4.png', 'illustration5.png', 'illustration6.png', 'illustration7.png', 'illustration8.png', 'illustration9.png', 'illustration10.png', 'illustration11.png', 'illustration12.png', 'illustration13.png', 'illustration14.png', 'illustration15.png', 'illustration16.png', 'illustration17.png', 'illustration18.png'],
-            chibi: ['chibi1.png', 'chibi2.png', 'chibi3.png', 'chibi4.png', 'chibi5.png', 'chibi6.png', 'chibi7.png'],
-            references: ['reference1.png', 'reference2.jpg', 'reference3.png', 'reference4.png', 'reference5.png', 'reference6.jpg', 'reference7.jpg', 'reference8.jpg', 'reference9.png', 'reference11.png', 'reference12.png'],
+            illustration: Array.from({length: 18}, (_, i) => `illustration${i+1}.png`),
+            chibi: Array.from({length: 7}, (_, i) => `chibi${i+1}.png`),
+            references: Array.from({length: 11}, (_, i) => `reference${i+1}.png`),
             items: Array.from({length: 44}, (_, i) => `item${i+1}.png`),
             costumes: Array.from({length: 21}, (_, i) => `costume${i+1}.png`),
             bg: Array.from({length: 14}, (_, i) => `bgr${i+1}.jpg`)
