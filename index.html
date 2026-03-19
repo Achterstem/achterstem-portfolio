@@ -24,7 +24,7 @@
             font-family: 'EB Garamond', serif;
             min-height: 100vh;
             background-image: radial-gradient(circle at 50% 50%, #0f0f0f 0%, #050505 100%);
-            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
         }
 
         /* НАВИГАЦИЯ */
@@ -42,13 +42,11 @@
                     rgba(5, 5, 5, 0.9) 70%,
                     transparent 100%
                 );
-            pointer-events: none; 
         }
         nav ul {
             display: flex;
             list-style: none;
-            gap: clamp(15px, 5vw, 50px);
-            pointer-events: auto; 
+            gap: clamp(20px, 5vw, 50px);
         }
         nav a {
             text-decoration: none;
@@ -74,21 +72,21 @@
         /* ПРОФИЛЬ */
         .profile-content {
             display: flex; flex-direction: column; align-items: center;
-            justify-content: center; min-height: calc(100vh - 100px); text-align: center; padding: 20px;
+            justify-content: center; min-height: 80vh; text-align: center; padding: 20px;
         }
 
         .avatar {
             width: clamp(140px, 40vw, 180px); 
             height: clamp(140px, 40vw, 180px);
             background: url('avatar.png') center/cover;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             box-shadow: 0 0 50px rgba(0,0,0,0.2);
             border: 1px solid rgb(20 20 20); border-radius: 30px;
         }
 
         .profile-content h1 {
             font-family: 'Cinzel', serif; font-size: clamp(2rem, 10vw, 4rem);
-            letter-spacing: clamp(5px, 3vw, 15px); color: #fff; margin-bottom: 10px; text-transform: uppercase;
+            letter-spacing: clamp(5px, 2vw, 15px); color: #fff; margin-bottom: 10px; text-transform: uppercase;
         }
 
         .status-text {
@@ -96,30 +94,30 @@
             font-size: 0.75rem; letter-spacing: 2px; margin-bottom: 30px;
         }
 
-        .bio { max-width: 700px; font-size: clamp(1.1rem, 4vw, 1.4rem); line-height: 1.6; color: var(--text-dim); margin-bottom: 40px; }
+        .bio { max-width: 600px; font-size: clamp(1.1rem, 4vw, 1.4rem); line-height: 1.6; color: var(--text-dim); margin-bottom: 40px; }
 
         .links { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
         .links a {
             color: var(--text); text-decoration: none; font-family: 'Cinzel', serif;
-            font-size: 0.75rem; letter-spacing: 1px; transition: 0.3s;
+            font-size: 0.75rem; letter-spacing: 1.5px; transition: 0.3s;
             padding: 5px 10px; border: 1px solid transparent;
         }
         .links a:hover { color: var(--accent); border-bottom: 1px solid var(--accent); }
 
-        /* ОБЩИЙ КОНТЕНТ */
-        .content-wrap { max-width: 1200px; margin: 0 auto; padding: 0 20px 100px; }
+        /* КОНТЕНТ */
+        .content-wrap { max-width: 1200px; margin: 0 auto; padding: 0 20px 80px; }
         
-        .cat-header { margin-bottom: 15px; }
+        .cat-header { margin-bottom: 20px; }
         .cat-header h2 {
             font-family: 'Cinzel', serif;
             font-size: clamp(1.5rem, 6vw, 2.5rem);
             color: #fff;
             opacity: 0.9;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
         }
 
-        /* ГАЛЕРЕЯ MASONRY */
-        .category-section { margin-bottom: clamp(60px, 15vw, 120px); }
+        /* ГАЛЕРЕЯ */
+        .category-section { margin-bottom: 80px; }
 
         .grid { 
             column-count: 3;
@@ -144,56 +142,48 @@
             cursor: zoom-in; 
         }
 
-        .art-card:hover img { 
-            filter: grayscale(0%); 
-            contrast: 1.2; 
-        }
-
-        /* Специальные сетки для мелких ассетов */
         #grid-items, #grid-costumes {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
             gap: 10px;
-            column-count: auto; /* отмена masonry для мелких иконок */
         }
 
-        #grid-items .art-card img, #grid-costumes .art-card img {
-            width: 100%;
-            height: auto;
-            max-height: none;
-        }
+        #grid-items .art-card, #grid-costumes .art-card { width: 100%; }
+        #grid-items .art-card img, #grid-costumes .art-card img { max-height: none; width: 100%; }
 
-        @media (min-width: 601px) and (max-width: 900px) {
+        @media (max-width: 900px) {
             .grid { column-count: 2; }
-            #grid-items, #grid-costumes { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); }
+            #grid-items, #grid-costumes { grid-template-columns: repeat(auto-fill, minmax(70px, 1fr)); }
         }
 
         @media (max-width: 600px) {
             .grid { column-count: 1; }
-            #grid-items, #grid-costumes { grid-template-columns: repeat(auto-fill, minmax(70px, 1fr)); }
-            .content-wrap { padding: 0 15px 60px; }
+            nav a { letter-spacing: 1px; font-size: 0.65rem; }
+            .law-row { flex-direction: column; gap: 5px; padding: 15px 0; }
+            .law-number { width: auto; }
+            .law-text { font-size: 1.1rem; }
         }
 
         /* ЦЕНЫ И ТОС */
         .price-list {
-            margin-bottom: 10px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 15px;
+            margin-bottom: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
             border-top: 1px solid rgba(132, 117, 78, 0.2);
             padding-top: 20px;
         }
-        .price-item span { display: block; font-family: 'Cinzel', serif; color: var(--gold); font-size: 0.65rem; letter-spacing: 1px; margin-bottom: 2px; }
+        .price-item span { display: block; font-family: 'Cinzel', serif; color: var(--gold); font-size: 0.65rem; letter-spacing: 1.5px; margin-bottom: 3px; }
         .price-item strong { font-size: 1.3rem; color: #fff; font-family: 'EB Garamond', serif; }
 
         .extra-info {
-            margin-bottom: 20px;
-            font-size: 0.95rem;
-            color: #aaa;
+            margin-bottom: 25px;
+            font-size: 0.9rem;
+            color: #888;
             font-style: italic;
             border-left: 2px solid var(--accent);
             padding-left: 15px;
-            line-height: 1.4;
+            line-height: 1.5;
         }
 
         .laws-container { border-top: 1px solid rgba(132, 117, 78, 0.2); }
@@ -201,38 +191,34 @@
             padding: 20px 0;
             border-bottom: 1px solid rgba(132, 117, 78, 0.1);
             display: flex;
-            align-items: flex-start;
             gap: 20px;
         }
         .law-number {
             font-family: 'Cinzel', serif;
             color: var(--gold);
-            font-size: 0.75rem;
-            letter-spacing: 1px;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
             width: 40px;
             flex-shrink: 0;
-            padding-top: 4px;
         }
-        .law-text { font-size: 1.1rem; line-height: 1.5; color: var(--text); }
+        .law-text { font-size: 1.2rem; line-height: 1.5; color: var(--text); }
 
         #lightbox {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.98);
+            background: rgba(0,0,0,0.95);
             display: none;
             justify-content: center;
             align-items: center;
             z-index: 2000;
+            padding: 20px;
             cursor: zoom-out;
-            animation: fadeIn 0.3s ease;
         }
-        #lightbox img { max-width: 95%; max-height: 90%; object-fit: contain; }
-
-        /* Адаптация TOS для мобилок */
-        @media (max-width: 480px) {
-            .law-row { gap: 10px; }
-            .law-number { width: 30px; }
-            .law-text { font-size: 1rem; }
+        #lightbox img { 
+            max-width: 100%; 
+            max-height: 100%; 
+            object-fit: contain;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
         }
     </style>
 </head>
@@ -258,9 +244,9 @@
                 <div class="status-text">- not available for commissions -</div>
                 <p class="bio">Artist.</p>
                 <div class="links">
-                    <a href="https://t.me/Achterstem" target="_blank">Telegram</a>
-                    <a href="https://vk.com/l_corsair_l" target="_blank">Vkontakte</a>
-                    <a href="https://app.lava.top/achterstem?tabId=about" target="_blank">Lava.top</a>
+                    <a href="https://t.me/Achterstem">Telegram</a>
+                    <a href="https://vk.com/l_corsair_l">Vkontakte</a>
+                    <a href="https://app.lava.top/achterstem?tabId=about">Lava.top</a>
                 </div>
             </div>
         </section>
@@ -296,12 +282,14 @@
                 <div class="category-section">
                     <div class="cat-header"><h2>ITEMS</h2></div>
                     <div class="price-list"><strong>catwar</strong></div>
-                    <div id="grid-items"></div> </div>
+                    <div id="grid-items" class="grid"></div>
+                </div>
 
                 <div class="category-section">
                     <div class="cat-header"><h2>COSTUMES</h2></div>
                     <div class="price-list"><strong>catwar</strong></div>
-                    <div id="grid-costumes"></div> </div>
+                    <div id="grid-costumes" class="grid"></div>
+                </div>
 
                 <div class="category-section">
                     <div class="cat-header"><h2>BACKGROUNDS</h2></div>
@@ -339,8 +327,12 @@
             const img = document.getElementById('lightbox-img');
             img.src = src;
             lb.style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // Запрет прокрутки при открытом фото
         }
-        function closeLightbox() { document.getElementById('lightbox').style.display = 'none'; }
+        function closeLightbox() { 
+            document.getElementById('lightbox').style.display = 'none'; 
+            document.body.style.overflow = 'auto'; 
+        }
 
         const galleryData = {
             illustration: ['illustration1.png', 'illustration2.png', 'illustration3.png', 'illustration4.png', 'illustration5.png', 'illustration6.png', 'illustration7.png', 'illustration8.png', 'illustration9.png', 'illustration10.png', 'illustration11.png', 'illustration12.png', 'illustration13.png', 'illustration14.png', 'illustration15.png', 'illustration16.png', 'illustration17.png', 'illustration18.png'],
