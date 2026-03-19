@@ -35,12 +35,7 @@
             z-index: 1000;
             display: flex;
             justify-content: center;
-            background: linear-gradient(
-                    to bottom, 
-                    var(--bg) 0%,
-                    rgba(5, 5, 5, 0.8) 50%,
-                    transparent 100%
-                );
+            background: linear-gradient(to bottom, var(--bg) 0%, rgba(5, 5, 5, 0.8) 50%, transparent 100%);
             pointer-events: none; 
         }
         nav ul {
@@ -77,11 +72,12 @@
 
         .avatar {
             width: 180px; height: 180px;
-            background: url('https://via.placeholder.com/180/111/84754e?text=AVATAR') center/cover;
             margin-bottom: 30px;
             box-shadow: 0 0 50px rgba(0,0,0,0.2);
             border: 1px solid rgba(132, 117, 78, 0.1); border-radius: 30px;
+            overflow: hidden;
         }
+        .avatar img { width: 100%; height: 100%; object-fit: cover; }
 
         .profile-content h1 {
             font-family: 'Cinzel', serif; font-size: clamp(2.5rem, 8vw, 4rem);
@@ -102,10 +98,10 @@
         }
         .links a:hover { color: var(--accent); }
 
-        /* ОБЩИЙ КОНТ */
-        .content-wrap { max-width: 1200px; margin: 0 auto; padding: 0 40px 100px; }
+        /* ОБЩИЙ КОНТЕНТ */
+        .content-wrap { max-width: 1400px; margin: 0 auto; padding: 0 40px 100px; }
         
-        .cat-header { margin-bottom: 10px; }
+        .cat-header { margin-bottom: 20px; }
         .cat-header h2 {
             font-family: 'Cinzel', serif;
             font-size: 2.5rem;
@@ -114,12 +110,59 @@
             letter-spacing: 3px;
         }
 
-        /* ГАЛЕРЕЯ */
+        /* ГАЛЕРЕЯ MASONRY */
         .category-section { margin-bottom: 120px; }
+        
+        .grid { 
+            column-count: 3; /* Количество колонок */
+            column-gap: 20px;
+            width: 100%;
+        }
+
+        .art-card { 
+            display: inline-block; /* Важно для masonry */
+            width: 100%;
+            margin-bottom: 20px;
+            transition: 0.3s;
+        }
+
+        .art-card img { 
+            display: block;
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            filter: grayscale(20%) contrast(1.1); 
+            transition: 0.4s; 
+            cursor: zoom-in; 
+        }
+
+        .art-card:hover img { 
+            filter: grayscale(0%); 
+            contrast: 1.2; 
+            transform: translateY(-5px);
+        }
+
+        /* Сетки для мелких ассетов (items) */
+        #grid-items, #grid-costumes {
+            column-count: 5;
+        }
+
+        /* Адаптивность для колонок */
+        @media (max-width: 1100px) {
+            .grid { column-count: 2; }
+            #grid-items, #grid-costumes { column-count: 3; }
+        }
+
+        @media (max-width: 700px) {
+            .grid { column-count: 1; }
+            #grid-items, #grid-costumes { column-count: 2; }
+            .content-wrap { padding: 0 20px 100px; }
+        }
+
         .price-list {
-            margin-bottom: 10px;
+            margin-bottom: 20px;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 20px;
             border-top: 1px solid rgba(132, 117, 78, 0.2);
             padding-top: 20px;
@@ -127,58 +170,8 @@
         .price-item span { display: block; font-family: 'Cinzel', serif; color: var(--gold); font-size: 0.7rem; letter-spacing: 2px; margin-bottom: 5px; }
         .price-item strong { font-size: 1.5rem; color: #fff; font-family: 'EB Garamond', serif; }
 
-        .grid { 
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    justify-content: flex-start;
-}
-
-.art-card { 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: 0.3s;
-    height: fit-content;
-}
-
-.art-card:hover {
-}
-
-.art-card img { 
-    display: block;
-    border-radius: 20px;
-    max-width: 1073px;
-    height: auto;
-    max-height: 363px;
-    filter: grayscale(20%) contrast(1.1); 
-    transition: 0.4s; 
-    cursor: zoom-in; 
-}
-
-.art-card:hover img { 
-    filter: grayscale(0%); 
-    contrast: 1.2; 
-}
-
-#grid-items, #grid-costumes {
-    gap: 10px;
-}
-
-#grid-costumes .art-card img {
-    max-height: 150px;
-}
-
-@media (max-width: 900px) {
-    .grid { column-count: 2; }
-}
-
-@media (max-width: 600px) {
-    .grid { column-count: 1; }
-}
-
         .extra-info {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             font-size: 1rem;
             color: #aaa;
             font-style: italic;
@@ -218,7 +211,7 @@
             cursor: zoom-out;
             animation: fadeIn 0.3s ease;
         }
-        #lightbox img { max-width: 90%; max-height: 90%; }
+        #lightbox img { max-width: 95%; max-height: 95%; object-fit: contain; }
 
     </style>
 </head>
@@ -239,7 +232,7 @@
     <main>
         <section id="about" class="page active">
             <div class="profile-content">
-                <div class="avatar"><img src="avatar.png" alt="Аватар" class="avatar"></div>
+                <div class="avatar"><img src="avatar.png" alt="Avatar"></div>
                 <h1>Achterstem</h1>
                 <div class="status-text">- not available for commissions -</div>
                 <p class="bio">Artist.</p>
@@ -272,42 +265,29 @@
                     <div class="price-list">
                         <div class="price-item"><span>Fullbody</span><strong>44$</strong></div>
                     </div>
-                    <div class="extra-info">
-                        Additional character +80% of the price.<br>
-                        Background from 20$, depends on hardness. Abstractions are free!
-                    </div>
                     <div id="grid-chibi" class="grid"></div>
                 </div>
 
                 <div class="category-section">
                     <div class="cat-header"><h2>REFERENCES</h2></div>
-                    <div class="price-list">
-                        <div class="price-item"><span>Reference cost</span><strong>Based on above prices</strong></div>
-                    </div>
                     <div id="grid-references" class="grid"></div>
                 </div>
 
                 <div class="category-section">
                     <div class="cat-header"><h2>ITEMS</h2></div>
-                    <div class="price-list">
-                        <strong>catwar</strong>
-                    </div>
+                    <div class="price-list"><strong>catwar</strong></div>
                     <div id="grid-items" class="grid"></div>
                 </div>
 
                 <div class="category-section">
                     <div class="cat-header"><h2>COSTUMES</h2></div>
-                    <div class="price-list">
-                        <strong>catwar</strong>
-                    </div>
+                    <div class="price-list"><strong>catwar</strong></div>
                     <div id="grid-costumes" class="grid"></div>
                 </div>
 
                 <div class="category-section">
                     <div class="cat-header"><h2>BACKGROUNDS</h2></div>
-                    <div class="price-list">
-                        <strong>catwar</strong>
-                    </div>
+                    <div class="price-list"><strong>catwar</strong></div>
                     <div id="grid-bg" class="grid"></div>
                 </div>
 
@@ -333,7 +313,8 @@
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.querySelectorAll('nav a').forEach(a => a.classList.remove('active-link'));
             document.getElementById(id).classList.add('active');
-            document.getElementById('link-' + id).classList.add('active-link');
+            const link = document.getElementById('link-' + id);
+            if(link) link.classList.add('active-link');
             window.scrollTo(0,0);
         }
 
@@ -342,30 +323,41 @@
             const img = document.getElementById('lightbox-img');
             img.src = src;
             lb.style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // Запрет скролла при открытом фото
         }
-        function closeLightbox() { document.getElementById('lightbox').style.display = 'none'; }
 
-        // ГАЛЕРЕЯ УРААААА
+        function closeLightbox() { 
+            document.getElementById('lightbox').style.display = 'none'; 
+            document.body.style.overflow = 'auto';
+        }
+
+        // Данные галереи
         const galleryData = {
             illustration: ['illustration1.png', 'illustration2.png', 'illustration3.png', 'illustration4.png', 'illustration5.png', 'illustration6.png', 'illustration7.png', 'illustration8.png', 'illustration9.png', 'illustration10.png', 'illustration11.png', 'illustration12.png', 'illustration13.png', 'illustration14.png', 'illustration15.png', 'illustration16.png', 'illustration17.png', 'illustration18.png'],
             chibi: ['chibi1.png', 'chibi2.png', 'chibi3.png', 'chibi4.png', 'chibi5.png', 'chibi6.png', 'chibi7.png'],
             references: ['reference1.png', 'reference2.jpg', 'reference3.png', 'reference4.png', 'reference5.png', 'reference6.jpg', 'reference7.jpg', 'reference8.jpg', 'reference9.png', 'reference10.png', 'reference11.png', 'reference12.png'],
-            items: ['item1.png', 'item2.png', 'item3.png', 'item4.png', 'item5.png', 'item6.png', 'item7.png', 'item8.png', 'item9.png', 'item10.png', 'item11.png', 'item12.png', 'item13.png', 'item14.png', 'item15.png', 'item16.png', 'item17.png', 'item18.png', 'item19.png', 'item20.png', 'item21.png', 'item22.png', 'item23.png', 'item24.png', 'item25.png', 'item26.png', 'item27.png', 'item28.png', 'item29.png', 'item30.png', 'item31.png', 'item32.png', 'item33.png', 'item34.png', 'item35.png', 'item36.png', 'item37.png', 'item38.png', 'item39.png', 'item40.png', 'item41.png', 'item42.png', 'item43.png', 'item44.png'],
-            costumes: ['costume1.png', 'costume2.png', 'costume3.png', 'costume4.png', 'costume5.png', 'costume6.png', 'costume7.png', 'costume9.png', 'costume10.png', 'costume11.png', 'costume8.png', 'costume12.png', 'costume13.png', 'costume14.png', 'costume15.png', 'costume16.png', 'costume17.png', 'costume18.png', 'costume19.png', 'costume20.png', 'costume21.png'],
-            bg: ['bgr1.jpg', 'bgr2.jpg', 'bgr3.jpg', 'bgr4.jpg', 'bgr5.jpg', 'bgr6.jpg', 'bgr7.jpg', 'bgr8.jpg', 'bgr9.jpg', 'bgr10.jpg', 'bgr11.jpg', 'bgr12.jpg', 'bgr13.jpg', 'bgr14.jpg']
+            items: Array.from({length: 44}, (_, i) => `item${i+1}.png`),
+            costumes: Array.from({length: 21}, (_, i) => `costume${i+1}.png`),
+            bg: Array.from({length: 14}, (_, i) => `bgr${i+1}.jpg`)
         };
 
         function renderGrid(containerId, images) {
             const container = document.getElementById(containerId);
             if(!container) return;
-            images.forEach(src => {
-                const div = document.createElement('div');
-                div.className = 'art-card';
-                div.innerHTML = `<img src="${src}" onclick="openLightbox('${src}')" alt="">`;
-                container.appendChild(div);
-            });
+            
+            const html = images.map(src => `
+                <div class="art-card">
+                    <img src="${src}" 
+                         onclick="openLightbox('${src}')" 
+                         loading="lazy" 
+                         alt="Artwork">
+                </div>
+            `).join('');
+            
+            container.innerHTML = html;
         }
 
+        // Инициализация
         renderGrid('grid-illustration', galleryData.illustration);
         renderGrid('grid-chibi', galleryData.chibi);
         renderGrid('grid-references', galleryData.references);
