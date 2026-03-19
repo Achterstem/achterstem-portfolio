@@ -73,29 +73,6 @@
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        .art-card {
-            background: #1a1a1a;
-            border-radius: 20px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .art-card::after {
-            content: "";
-            position: absolute;
-            top: 0; left: -100%;
-            width: 200%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.03), transparent);
-            animation: loading-shimmer 1.5s infinite;
-        }
-        
-        .art-card.loaded::after { display: none; background: transparent; }
-        .art-card.loaded { background: transparent; }
-        
-        @keyframes loading-shimmer {
-            100% { transform: translateX(50%); }
-        }
-
         /* ПРОФИЛЬ */
         .profile-content {
             display: flex; flex-direction: column; align-items: center;
@@ -439,24 +416,15 @@
         };
 
         function renderGrid(containerId, images) {
-    const container = document.getElementById(containerId);
-    if(!container) return;
-    
-    images.forEach(src => {
-        const div = document.createElement('div');
-        div.className = 'art-card';
-        
-        const img = document.createElement('img');
-        img.src = src;
-        img.alt = "";
-        img.loading = "lazy";
-        img.onclick = () => openLightbox(src);
-        img.onload = () => div.classList.add('loaded');
-
-        div.appendChild(img);
-        container.appendChild(div);
-    });
-}
+            const container = document.getElementById(containerId);
+            if(!container) return;
+            images.forEach(src => {
+                const div = document.createElement('div');
+                div.className = 'art-card';
+                div.innerHTML = `<img src="${src}" onclick="openLightbox('${src}')" alt="" loading="lazy">`;
+                container.appendChild(div);
+            });
+        }
 
         renderGrid('grid-illustration', galleryData.illustration);
         renderGrid('grid-chibi', galleryData.chibi);
