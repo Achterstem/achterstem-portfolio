@@ -35,7 +35,12 @@
             z-index: 1000;
             display: flex;
             justify-content: center;
-            background: linear-gradient(to bottom, var(--bg) 0%, rgba(5, 5, 5, 0.8) 50%, transparent 100%);
+            background: linear-gradient(
+                    to bottom, 
+                    var(--bg) 0%,
+                    rgba(5, 5, 5, 0.8) 50%,
+                    transparent 100%
+                );
             pointer-events: none; 
         }
         nav ul {
@@ -72,12 +77,11 @@
 
         .avatar {
             width: 180px; height: 180px;
+            background: url('avatar.png') center/cover;
             margin-bottom: 30px;
             box-shadow: 0 0 50px rgba(0,0,0,0.2);
             border: 1px solid rgba(132, 117, 78, 0.1); border-radius: 30px;
-            overflow: hidden;
         }
-        .avatar img { width: 100%; height: 100%; object-fit: cover; }
 
         .profile-content h1 {
             font-family: 'Cinzel', serif; font-size: clamp(2.5rem, 8vw, 4rem);
@@ -98,10 +102,10 @@
         }
         .links a:hover { color: var(--accent); }
 
-        /* ОБЩИЙ КОНТЕНТ */
-        .content-wrap { max-width: 1400px; margin: 0 auto; padding: 0 40px 100px; }
+        /* ОБЩИЙ КОНТ */
+        .content-wrap { max-width: 1200px; margin: 0 auto; padding: 0 40px 100px; }
         
-        .cat-header { margin-bottom: 20px; }
+        .cat-header { margin-bottom: 10px; }
         .cat-header h2 {
             font-family: 'Cinzel', serif;
             font-size: 2.5rem;
@@ -112,17 +116,17 @@
 
         /* ГАЛЕРЕЯ MASONRY */
         .category-section { margin-bottom: 120px; }
-        
+
         .grid { 
-            column-count: 3; /* Количество колонок */
-            column-gap: 20px;
+            column-count: 3;
+            column-gap: 15px;
             width: 100%;
         }
 
         .art-card { 
-            display: inline-block; /* Важно для masonry */
+            display: inline-block; /* Важно для Masonry */
             width: 100%;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             transition: 0.3s;
         }
 
@@ -130,7 +134,7 @@
             display: block;
             width: 100%;
             height: auto;
-            border-radius: 15px;
+            border-radius: 20px;
             filter: grayscale(20%) contrast(1.1); 
             transition: 0.4s; 
             cursor: zoom-in; 
@@ -139,30 +143,45 @@
         .art-card:hover img { 
             filter: grayscale(0%); 
             contrast: 1.2; 
-            transform: translateY(-5px);
         }
 
-        /* Сетки для мелких ассетов (items) */
+        /* Специфичные размеры для ассетов */
         #grid-items, #grid-costumes {
-            column-count: 5;
+            column-count: auto;
+            column-width: 150px; /* Чтобы мелкие ассеты не растягивались на пол-экрана */
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
         }
 
-        /* Адаптивность для колонок */
-        @media (max-width: 1100px) {
+        #grid-items .art-card, #grid-costumes .art-card {
+            width: auto;
+            margin-bottom: 0;
+        }
+
+        #grid-items .art-card img {
+            max-height: 363px; /* Ограничение из твоего кода */
+            width: auto;
+        }
+
+        #grid-costumes .art-card img {
+            max-height: 150px; /* Ограничение из твоего кода */
+            width: auto;
+        }
+
+        @media (max-width: 900px) {
             .grid { column-count: 2; }
-            #grid-items, #grid-costumes { column-count: 3; }
         }
 
-        @media (max-width: 700px) {
+        @media (max-width: 600px) {
             .grid { column-count: 1; }
-            #grid-items, #grid-costumes { column-count: 2; }
-            .content-wrap { padding: 0 20px 100px; }
         }
 
+        /* ЦЕНЫ И ТОС (без изменений) */
         .price-list {
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
             border-top: 1px solid rgba(132, 117, 78, 0.2);
             padding-top: 20px;
@@ -171,7 +190,7 @@
         .price-item strong { font-size: 1.5rem; color: #fff; font-family: 'EB Garamond', serif; }
 
         .extra-info {
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             font-size: 1rem;
             color: #aaa;
             font-style: italic;
@@ -179,7 +198,6 @@
             padding-left: 20px;
         }
 
-        /* ТОС */
         .laws-container { border-top: 1px solid rgba(132, 117, 78, 0.2); }
         .law-row {
             padding: 25px 0;
@@ -199,7 +217,6 @@
         }
         .law-text { font-size: 1.3rem; line-height: 1.6; color: var(--text); }
 
-        /* ЛАЙТБОКС */
         #lightbox {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -211,8 +228,7 @@
             cursor: zoom-out;
             animation: fadeIn 0.3s ease;
         }
-        #lightbox img { max-width: 95%; max-height: 95%; object-fit: contain; }
-
+        #lightbox img { max-width: 90%; max-height: 90%; }
     </style>
 </head>
 <body>
@@ -232,7 +248,7 @@
     <main>
         <section id="about" class="page active">
             <div class="profile-content">
-                <div class="avatar"><img src="avatar.png" alt="Avatar"></div>
+                <div class="avatar"></div>
                 <h1>Achterstem</h1>
                 <div class="status-text">- not available for commissions -</div>
                 <p class="bio">Artist.</p>
@@ -245,7 +261,6 @@
 
         <section id="gallery" class="page">
             <div class="content-wrap">
-                
                 <div class="category-section">
                     <div class="cat-header"><h2>ILLUSTRATION</h2></div>
                     <div class="price-list">
@@ -262,9 +277,7 @@
 
                 <div class="category-section">
                     <div class="cat-header"><h2>CHIBI</h2></div>
-                    <div class="price-list">
-                        <div class="price-item"><span>Fullbody</span><strong>44$</strong></div>
-                    </div>
+                    <div class="price-list"><div class="price-item"><span>Fullbody</span><strong>44$</strong></div></div>
                     <div id="grid-chibi" class="grid"></div>
                 </div>
 
@@ -287,10 +300,8 @@
 
                 <div class="category-section">
                     <div class="cat-header"><h2>BACKGROUNDS</h2></div>
-                    <div class="price-list"><strong>catwar</strong></div>
                     <div id="grid-bg" class="grid"></div>
                 </div>
-
             </div>
         </section>
 
@@ -313,8 +324,7 @@
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.querySelectorAll('nav a').forEach(a => a.classList.remove('active-link'));
             document.getElementById(id).classList.add('active');
-            const link = document.getElementById('link-' + id);
-            if(link) link.classList.add('active-link');
+            document.getElementById('link-' + id).classList.add('active-link');
             window.scrollTo(0,0);
         }
 
@@ -323,15 +333,9 @@
             const img = document.getElementById('lightbox-img');
             img.src = src;
             lb.style.display = 'flex';
-            document.body.style.overflow = 'hidden'; // Запрет скролла при открытом фото
         }
+        function closeLightbox() { document.getElementById('lightbox').style.display = 'none'; }
 
-        function closeLightbox() { 
-            document.getElementById('lightbox').style.display = 'none'; 
-            document.body.style.overflow = 'auto';
-        }
-
-        // Данные галереи
         const galleryData = {
             illustration: ['illustration1.png', 'illustration2.png', 'illustration3.png', 'illustration4.png', 'illustration5.png', 'illustration6.png', 'illustration7.png', 'illustration8.png', 'illustration9.png', 'illustration10.png', 'illustration11.png', 'illustration12.png', 'illustration13.png', 'illustration14.png', 'illustration15.png', 'illustration16.png', 'illustration17.png', 'illustration18.png'],
             chibi: ['chibi1.png', 'chibi2.png', 'chibi3.png', 'chibi4.png', 'chibi5.png', 'chibi6.png', 'chibi7.png'],
@@ -344,20 +348,14 @@
         function renderGrid(containerId, images) {
             const container = document.getElementById(containerId);
             if(!container) return;
-            
-            const html = images.map(src => `
-                <div class="art-card">
-                    <img src="${src}" 
-                         onclick="openLightbox('${src}')" 
-                         loading="lazy" 
-                         alt="Artwork">
-                </div>
-            `).join('');
-            
-            container.innerHTML = html;
+            images.forEach(src => {
+                const div = document.createElement('div');
+                div.className = 'art-card';
+                div.innerHTML = `<img src="${src}" onclick="openLightbox('${src}')" alt="" loading="lazy">`;
+                container.appendChild(div);
+            });
         }
 
-        // Инициализация
         renderGrid('grid-illustration', galleryData.illustration);
         renderGrid('grid-chibi', galleryData.chibi);
         renderGrid('grid-references', galleryData.references);
