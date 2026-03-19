@@ -99,12 +99,22 @@
 
         .bio { max-width: 700px; font-size: 1.4rem; line-height: 1.8; color: var(--text-dim); margin-bottom: 50px; }
 
-        .links { display: flex; gap: 40px; }
+        .links { display: flex; gap: 40px; justify-content: center; }
         .links a {
-            color: var(--text); text-decoration: none; font-family: 'Cinzel', serif;
-            font-size: 0.8rem; letter-spacing: 2px; transition: 0.3s;
+            color: var(--text);
+            text-decoration: none;
+            font-family: 'Cinzel', serif;
+            border: 1px solid #33322d;
+            padding-inline: 2%;
+            border-radius: 2px;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            transition: 0.3s;
         }
-        .links a:hover { color: var(--accent); }
+        .links a:hover {
+            background-color: #33322d;
+            color: var(--bg);
+        }
 
         /* КОНТЕНТ */
         .content-wrap { max-width: 1200px; margin: 0 auto; padding: 0 40px 100px; }
