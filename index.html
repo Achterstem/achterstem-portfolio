@@ -296,7 +296,7 @@
                 <div class="avatar"></div>
                 <h1>Achterstem</h1>
                 <div class="status-text">— Achter Fraudhart —</div>
-                <p class="bio"><span style="color: #814545;">Not available for commissions</span><br>
+                <p class="bio"><span style="color: #814545;">Available for chibi, icons, heads and half body</span><br>
                 <span style="font-size: 1rem;">Last update: 19.03.2026</span></p>
                 <div class="links">
                     <a href="https://t.me/Achterstem">Telegram</a>
@@ -320,6 +320,18 @@
                         Background from 20$, depends on hardness. Abstractions are free!
                     </div>
                     <div id="grid-illustration" class="grid"></div>
+                </div>
+
+                <div class="category-section">
+                    <div class="cat-header"><h2>ICONS</h2></div>
+                    <div class="price-list">
+                        <div class="price-item"><span>Character</span><strong>44$</strong></div>
+                    </div>
+                    <div class="extra-info">
+                        Additional character +80% of the price.<br>
+                        Frameworks from 5$, depends on hardness.
+                    </div>
+                    <div id="grid-icon" class="grid"></div>
                 </div>
 
                 <div class="category-section">
@@ -408,6 +420,7 @@
 
         const galleryData = {
             illustration: Array.from({length: 18}, (_, i) => `illustration${i+1}.webp`),
+            icon: Array.from({length: 7}, (_, i) => `icon${i+1}.png`),
             chibi: Array.from({length: 11}, (_, i) => `chibi${i+1}.png`),
             references: Array.from({length: 11}, (_, i) => `reference${i+1}.jpg`),
             items: Array.from({length: 44}, (_, i) => `item${i+1}.png`),
@@ -427,6 +440,7 @@
         }
 
         renderGrid('grid-illustration', galleryData.illustration);
+        renderGrid('grid-icon', galleryData.icon);
         renderGrid('grid-chibi', galleryData.chibi);
         renderGrid('grid-references', galleryData.references);
         renderGrid('grid-items', galleryData.items);
